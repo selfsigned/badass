@@ -1,10 +1,14 @@
+#!/bin/bash
+echo "->Setting up wireshark package"
+echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections
+
 echo "->Installing xfce and GNSv3 deps"
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
 apt-get install -y --no-install-recommends \
 	xorg lightdm xfce4 \
 	fasttrack-archive-keyring gawk\
-       	curl gnupg ca-certificates lsb-release \
+        curl gnupg ca-certificates lsb-release git make\
 	python3-pip python3-pyqt5 python3-pyqt5.qtsvg python3-pyqt5.qtwebsockets \
 	wireshark vim tmux\
 
@@ -33,8 +37,15 @@ systemctl enable --now lightdm
 echo "->Installing GNSv3"
 pip3 install gns3-server gns3-gui
 
+echo "->Installing ubridge"
+cd /usr/local/src
+git clone https://github.com/GNS3/ubridge
+cd /usr/local/src/ubridge && make install
+
 echo "->Setup vagrant user"
-usermod -aG video -aG docker -aG wireshark vagrant
+for i in "video" "docker" "wireshark"; do
+	usermod -aG $i vagrant
+done
 echo -e "vagrant\nvagrant" | passwd vagrant
 
 echo "->Installation finished! login with vagrant:vagrant"
