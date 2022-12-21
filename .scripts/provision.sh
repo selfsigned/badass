@@ -8,7 +8,7 @@ apt-get update
 apt-get install -y --no-install-recommends \
 	xorg lightdm xfce4 \
 	fasttrack-archive-keyring gawk\
-        curl gnupg ca-certificates lsb-release git make gcc libc-dev \
+        curl gnupg ca-certificates lsb-release git make gcc libc-dev libpcap-dev \
 	python3-pip python3-pyqt5 python3-pyqt5.qtsvg python3-pyqt5.qtwebsockets \
 	wireshark vim tmux\
 
@@ -49,5 +49,10 @@ done
 echo -e "vagrant\nvagrant" | passwd vagrant
 
 echo "->Installation finished! login with vagrant:vagrant"
-echo "->Shutting down to finish install, re-run vagrant up"
-poweroff
+
+if [ ! -f ~/.first_shutdown ]; then
+	touch ~/.first_shutdown
+	echo "->Shutting down to finish install, re-run vagrant up"
+	poweroff
+fi
+
