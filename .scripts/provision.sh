@@ -8,7 +8,7 @@ apt-get update
 apt-get install -y --no-install-recommends \
 	xorg lightdm xfce4 \
 	fasttrack-archive-keyring gawk\
-        curl gnupg ca-certificates lsb-release git make\
+        curl gnupg ca-certificates lsb-release git make gcc libc-dev \
 	python3-pip python3-pyqt5 python3-pyqt5.qtsvg python3-pyqt5.qtwebsockets \
 	wireshark vim tmux\
 
