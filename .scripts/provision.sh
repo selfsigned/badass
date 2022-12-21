@@ -8,7 +8,8 @@ apt-get update
 apt-get install -y --no-install-recommends \
 	xorg lightdm xfce4 \
 	fasttrack-archive-keyring gawk\
-        curl gnupg ca-certificates lsb-release git make gcc libc-dev libpcap-dev \
+        curl gnupg ca-certificates lsb-release software-properties-common \
+	git make gcc libc-dev libpcap-dev \
 	python3-pip python3-pyqt5 python3-pyqt5.qtsvg python3-pyqt5.qtwebsockets \
 	wireshark vim tmux\
 
@@ -41,6 +42,11 @@ echo "->Installing ubridge"
 cd /usr/local/src
 git clone https://github.com/GNS3/ubridge
 cd /usr/local/src/ubridge && make install
+
+echo "->Installing dynamips"
+apt-add-repository non-free
+apt-get update
+apt-get install -y --no-install-recommends dynamips
 
 echo "->Setup vagrant user"
 for i in "video" "docker" "wireshark"; do
