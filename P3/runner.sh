@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #config files need to be in a routing method folder and need to match the target name
-TARGETS=("all" "router_aleconte-1" "router_aleconte-2" "host_aleconte-1" "host_aleconte-2")
+TARGETS=("all" "_aleconte-1" "_aleconte-2" "_aleconte-3" "_aleconte-4" "host_aleconte-1" "host_aleconte-2" "host_aleconte-3")
 
-if [ ! $# -eq 2 ]; then
-    echo "Usage: $0 static|dynamic {targets}"
+if [ ! $# -eq 1 ]; then
+    echo "Usage: $0 {targets}"
     echo "Available targets: "
     echo ${TARGETS[@]}
     exit 1
@@ -39,31 +39,29 @@ function wait_and_exec() {
     cat $2/$1.sh | docker exec -i ${containermap[$1]} bash
 }
 
-SCRIPT_PATH=""
-if [ "$1" = "static" ]; then
-    echo "->Instancing devices in $1 mode"
-    SCRIPT_PATH="$(dirname $0)/static"
-elif [ "$1" = "dynamic" ]; then
-    echo "->Instancing devices in $1 mode"
-    SCRIPT_PATH="$(dirname $0)/dynamic"
-else
-    echo "$1 is not a valid routing mode"
-    exit 1
-fi
-
-for arg in ${@:2}; do
+SCRIPT_PATH="$(dirname $0)/confs"
+for arg in ${@:1}; do
     case $arg in
         "all"|"router_aleconte-1")
-            wait_and_exec "router_aleconte-1" $SCRIPT_PATH
+            wait_and_exec "_aleconte-1" $SCRIPT_PATH
             ;;&
         "all"|"router_aleconte-2")
-            wait_and_exec "router_aleconte-2" $SCRIPT_PATH
+            wait_and_exec "_aleconte-2" $SCRIPT_PATH
+            ;;&
+        "all"|"router_aleconte-3")
+            wait_and_exec "_aleconte-3" $SCRIPT_PATH
+            ;;&
+        "all"|"router_aleconte-4")
+            wait_and_exec "_aleconte-4" $SCRIPT_PATH
             ;;&
         "all"|"host_aleconte-1")
             wait_and_exec "host_aleconte-1" $SCRIPT_PATH
             ;;&
         "all"|"host_aleconte-2")
             wait_and_exec "host_aleconte-2" $SCRIPT_PATH
+            ;;&
+        "all"|"host_aleconte-3")
+            wait_and_exec "host_aleconte-3" $SCRIPT_PATH
             ;;
     esac
 done
