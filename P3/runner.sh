@@ -42,16 +42,16 @@ function wait_and_exec() {
 SCRIPT_PATH="$(dirname $0)/confs"
 for arg in ${@:1}; do
     case $arg in
-        "all"|"router_aleconte-1")
+        "all"|"_aleconte-1")
             wait_and_exec "_aleconte-1" $SCRIPT_PATH
             ;;&
-        "all"|"router_aleconte-2")
+        "all"|"_aleconte-2")
             wait_and_exec "_aleconte-2" $SCRIPT_PATH
             ;;&
-        "all"|"router_aleconte-3")
+        "all"|"_aleconte-3")
             wait_and_exec "_aleconte-3" $SCRIPT_PATH
             ;;&
-        "all"|"router_aleconte-4")
+        "all"|"_aleconte-4")
             wait_and_exec "_aleconte-4" $SCRIPT_PATH
             ;;&
         "all"|"host_aleconte-1")
