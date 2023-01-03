@@ -1,6 +1,9 @@
 ### BGP
+touch /etc/frr/frr.conf
+touch /etc/frr/vtysh.conf
+vtysh -b
 vtysh << EOF
-configure terminal
+conf t
 no ipv6 forwarding
 !
 interface eth0

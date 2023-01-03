@@ -11,8 +11,11 @@ brctl addif br0 $VXLAN_IFNAME
 brctl addif br0 $VXLAN_BRIDGE
 
 ### BGP
+touch /etc/frr/frr.conf
+touch /etc/frr/vtysh.conf
+vtysh -b
 vtysh << EOF
-configure terminal
+conf t
 no ipv6 forwarding
 !
 interface eth1
@@ -24,7 +27,7 @@ ip address 1.1.1.3/32
 ip ospf area 0
 !
 router bgp 1
-neighbor 1.1.1.1 remote-as-1
+neighbor 1.1.1.1 remote-as 1
 neighbor 1.1.1.1 update-source lo
 !
 address-family l2vpn evpn

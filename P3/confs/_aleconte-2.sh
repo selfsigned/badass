@@ -11,8 +11,11 @@ brctl addif br0 $VXLAN_IFNAME
 brctl addif br0 $VXLAN_BRIDGE
 
 ### BGP
+touch /etc/frr/frr.conf
+touch /etc/frr/vtysh.conf
+vtysh -b
 vtysh << EOF
-configure terminal
+conf t
 no ipv6 forwarding 
 !
 interface eth0
