@@ -1,6 +1,7 @@
+# ROUTE REFLECTOR
 ### BGP
-touch /etc/frr/frr.conf
-touch /etc/frr/vtysh.conf
+RR_IP=1.1.1.1
+
 vtysh -b
 vtysh << EOF
 conf t
@@ -16,7 +17,7 @@ interface eth2
 ip address 10.1.1.9/30
 !
 interface lo
-ip address 1.1.1.1/32
+ip address ${RR_IP}/32
 !
 router bgp 1
 neighbor ibgp peer-group
