@@ -31,7 +31,8 @@ neighbor ibgp route-reflector-client
 exit-address-family
 !
 router ospf
-network 0.0.0.0/0 area 0
+network 1.0.0.0/8 area 0
+network 10.0.0.0/8 area 0
 !
 line vty
 !
