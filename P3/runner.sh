@@ -36,7 +36,7 @@ function wait_on_container_start() {
 # $1 -> target hostname $2 -> script path
 function wait_and_exec() {
     wait_on_container_start $1
-    cat $2/$1.sh | docker exec -i ${containermap[$1]} bash
+    cat $2/_00_functions.sh $2/$1.sh | docker exec -i ${containermap[$1]} bash
 }
 
 SCRIPT_PATH="$(dirname $0)/confs"

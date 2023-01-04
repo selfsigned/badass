@@ -35,4 +35,7 @@ network 0.0.0.0/0 area 0
 !
 line vty
 !
+exit
+exit
+write integrated
 EOF
