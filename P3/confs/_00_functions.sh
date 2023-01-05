@@ -16,34 +16,28 @@ conf t
 no ipv6 forwarding
 
 # Setup the TopOfRack interface and add it to the OSPF backbone (area 0)
-!
 interface ${WAN_IFNAME}
 ip address ${WAN_IP}/${WAN_CIDR}
 ip ospf area 0
-!
 
 # Setup the loopback interface and add it to the OSPF backbone
 interface lo
 ip address ${LO_IP}/32
 ip ospf area 0
-!
 
 # Setup BGP AS 1, specifying the Route Reflector as neighbor, using the loopback interface as source
 router bgp 1
 neighbor ${RR_IP} remote-as 1
 neighbor ${RR_IP} update-source lo
-!
 
 # Enable the L2VPN control plane adding the route reflector as neighbor and publish our VNI
 address-family l2vpn evpn
 neighbor ${RR_IP} activate
 advertise-all-vni
 exit-address-family
-!
 
 # Enable OSPF routing
 router ospf
-!
 
 # Two exits because were lazy and two blocks in
 exit
