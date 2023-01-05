@@ -36,7 +36,7 @@ dpkg-reconfigure -fnoninteractive lightdm
 systemctl enable --now lightdm
 
 echo "->Installing GNSv3"
-pip3 install gns3-server gns3-gui
+pip3 install gns3-server==2.2.35.1 gns3-gui==2.2.35.1
 
 echo "->Installing ubridge"
 cd /usr/local/src
